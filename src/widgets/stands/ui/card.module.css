@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin-left: auto;
+}
+
+.labelFree,
+.labelBusy {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: relative;
+  left: -12px;
+  bottom: -12px;
+}
+
+.labelFree {
+  background-color: #198754;
+  color: white;
+}
+.labelBusy {
+  background-color: #ffc107;
+  color: #000;
+}
