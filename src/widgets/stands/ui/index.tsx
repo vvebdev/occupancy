@@ -2,7 +2,7 @@
 import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import type { Stand } from "../api/types";
-import { getStands, sendStands } from "../api";
+import { getStands, patchStand } from "../api";
 import { StandCard } from "./card";
 import { Spinner } from "react-bootstrap";
 
@@ -12,35 +12,27 @@ export const Stands = () => {
   const user = localStorage.getItem("user");
 
   const toggleStand = async (stand: Stand) => {
-    const nextStandList = standList.map((prevStand) => {
-      if (prevStand.id === stand.id) {
-        return {
-          ...prevStand,
-          status: prevStand.status === "free" ? "busy" : "free",
-          user: user ? user : "",
-        };
-      }
-      return prevStand;
-    });
-
     try {
-      await sendData(nextStandList);
-      setStandList(nextStandList);
+      const response = await patchStand(stand.id, user ? user : "");
+      const nextStand = (await response.json()) as Stand;
+
+      setStandList(
+        standList.map((prevStand) => {
+          if (prevStand.id === nextStand.id) {
+            return nextStand;
+          }
+          return prevStand;
+        })
+      );
     } catch (error) {
       throw error;
     }
   };
 
-  const sendData = async (stands: Stand[]) => {
-    const response = await sendStands(stands);
-    const responseData = await response.json();
-    setStandList(responseData.stands);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await getStands();
-      const { stands } = await response.json();
+      const stands = await response.json();
       setStandList(stands);
       setIsLoading(false);
     };

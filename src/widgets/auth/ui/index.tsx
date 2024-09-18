@@ -16,11 +16,11 @@ export const Auth = ({ onChange }: AuthProps) => {
 
   return (
     <div className={styles.auth}>
-      <h1>Привет! Для работы в системе введите свое имя</h1>
+      <h1>Привет! Для работы в системе введи свое имя и фамилию</h1>
       <Form onSubmit={handleConfirm}>
         <FloatingLabel
           controlId="floatingInput"
-          label="Введите ваше имя"
+          label="Введи имя и фамилию"
           className="mb-3"
         >
           <Form.Control

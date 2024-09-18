@@ -1,14 +1,14 @@
-import type { Stand } from "./types";
+const BASE_ULR = "https://smart-even-fold.glitch.me";
 
 export const getStands = () => {
-  return fetch("https://leather-lush-shoe.glitch.me/stands");
+  return fetch(BASE_ULR + "/stands");
 };
 
-export const sendStands = (data: Stand[]) => {
-  return fetch("https://leather-lush-shoe.glitch.me/stands", {
-    method: "POST",
+export const patchStand = (id: number, user: string) => {
+  return fetch(BASE_ULR + "/stands/" + id, {
+    method: "PATCH",
     body: JSON.stringify({
-      stands: data,
+      user,
     }),
   });
 };
