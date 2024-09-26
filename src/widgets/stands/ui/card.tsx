@@ -1,13 +1,14 @@
 import styles from "./card.module.css";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import type { Stand } from "../api/types";
+import { Switch } from "./switch";
 
 interface Props {
   stand: Stand;
-  onClick: () => void;
+  onChange: () => void;
 }
 
-export const StandCard = ({ stand, onClick }: Props) => {
+export const StandCard = ({ stand, onChange }: Props) => {
   return (
     <Card>
       <Card.Body>
@@ -21,10 +22,8 @@ export const StandCard = ({ stand, onClick }: Props) => {
               <span className={styles.labelBusy}>занял: {stand.user}</span>
             )}
           </div>
-          <div className={styles.button}>
-            <Button onClick={onClick}>
-              {stand.status === "free" ? "Занять" : "Освободить"}
-            </Button>
+          <div className={styles.controls}>
+            <Switch checked={stand.status === "free"} onChange={onChange} />
           </div>
         </div>
       </Card.Body>

@@ -52,7 +52,10 @@ export const Stands = () => {
             <ul className={styles.list}>
               {standList.map((stand) => (
                 <li className={styles.listItem} key={stand.id}>
-                  <StandCard stand={stand} onClick={() => toggleStand(stand)} />
+                  <StandCard
+                    stand={stand}
+                    onChange={() => toggleStand(stand)}
+                  />
                 </li>
               ))}
             </ul>

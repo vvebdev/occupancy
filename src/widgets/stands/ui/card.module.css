@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-.button {
+.controls {
   margin-left: auto;
 }
 
@@ -24,4 +24,5 @@
 .labelBusy {
   background-color: #ffc107;
   color: #000;
+  white-space: nowrap;
 }

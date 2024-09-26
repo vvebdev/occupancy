@@ -1,0 +1,41 @@
+.switch {
+  width: 48px;
+  padding: 2px;
+  position: relative;
+  border-radius: 100px;
+  border: none;
+  transition: background 0.3s;
+
+  &.on {
+    background: #0d6efd;
+  }
+
+  &.off {
+    background: #6c757d;
+  }
+}
+
+.appearance {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  .switch.on & {
+    transform: translateX(calc(50% - 12px));
+  }
+  .switch.off & {
+    transform: translateX(calc(-50% + 12px));
+  }
+}
+
+.circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  background: white;
+  flex-shrink: 0;
+}
