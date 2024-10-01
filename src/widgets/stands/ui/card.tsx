@@ -1,14 +1,15 @@
 import styles from "./card.module.css";
 import { Card, ListGroup } from "react-bootstrap";
-import type { Stand } from "../api/types";
 import { Switch } from "./switch";
+import type { Stand } from "../api/types";
 
 interface Props {
   stand: Stand;
   onChange: () => void;
+  onEdit: (stand: Stand) => void;
 }
 
-export const StandCard = ({ stand, onChange }: Props) => {
+export const StandCard = ({ stand, onChange, onEdit }: Props) => {
   const isFree = stand.status === "free";
   const cardBgProp = isFree ? "dark" : "primary";
 
@@ -16,17 +17,24 @@ export const StandCard = ({ stand, onChange }: Props) => {
     <Card bg={cardBgProp}>
       <Card.Header>
         <span className={styles.header}>
-          {stand.name}
+          <button className={styles.treeDots} onClick={() => onEdit(stand)}>
+            {stand.name}
+          </button>
+          {/* {stand.name} */}
+          <div style={{ marginLeft: "auto" }}></div>
           <Switch checked={isFree} onChange={onChange} />
+          {/* <button className={styles.treeDots} onClick={() => onEdit(stand)}>
+            &bull;&bull;&bull;
+          </button> */}
         </span>
       </Card.Header>
       <ListGroup variant="flush">
-        <ListGroup.Item>
+        {/* <ListGroup.Item>
           backend: <i className="text-muted">(в разработке)</i>
         </ListGroup.Item>
         <ListGroup.Item>
           frontend: <i className="text-muted">(в разработке)</i>
-        </ListGroup.Item>
+        </ListGroup.Item> */}
         <ListGroup.Item>
           <div className={styles.chips}>
             {isFree ? (
@@ -34,7 +42,7 @@ export const StandCard = ({ stand, onChange }: Props) => {
             ) : (
               <>
                 <span className={styles.chipBusy}>занят</span>
-                {/* <span className={styles.chip}>16 июня</span> */}
+                {/* <span className={styles.chip}>1 октября</span> */}
                 <span className={styles.chip}>{stand.user}</span>
               </>
             )}

@@ -3,4 +3,9 @@ export type Stand = {
   name: string;
   status: string;
   user: string;
+  datetime: number;
+  branches: {
+    frontend: string;
+    backend: string;
+  };
 };
