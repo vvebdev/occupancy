@@ -1,5 +1,5 @@
 import styles from "./card.module.css";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import type { Stand } from "../api/types";
 import { Switch } from "./switch";
 
@@ -9,24 +9,38 @@ interface Props {
 }
 
 export const StandCard = ({ stand, onChange }: Props) => {
+  const isFree = stand.status === "free";
+  const cardBgProp = isFree ? "dark" : "primary";
+
   return (
-    <Card>
-      <Card.Body>
-        <div className={styles.wrapper}>
-          <div>
-            <h3 style={{ marginBottom: 0 }}>{stand.name}</h3>
-            {stand.status === "free" && (
-              <span className={styles.labelFree}>свободно</span>
-            )}
-            {stand.status === "busy" && (
-              <span className={styles.labelBusy}>занял: {stand.user}</span>
+    <Card bg={cardBgProp}>
+      <Card.Header>
+        <span className={styles.header}>
+          {stand.name}
+          <Switch checked={isFree} onChange={onChange} />
+        </span>
+      </Card.Header>
+      <ListGroup variant="flush">
+        <ListGroup.Item>
+          backend: <i className="text-muted">(в разработке)</i>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          frontend: <i className="text-muted">(в разработке)</i>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className={styles.chips}>
+            {isFree ? (
+              <span className={styles.chipFree}>свободен</span>
+            ) : (
+              <>
+                <span className={styles.chipBusy}>занят</span>
+                {/* <span className={styles.chip}>16 июня</span> */}
+                <span className={styles.chip}>{stand.user}</span>
+              </>
             )}
           </div>
-          <div className={styles.controls}>
-            <Switch checked={stand.status === "free"} onChange={onChange} />
-          </div>
-        </div>
-      </Card.Body>
+        </ListGroup.Item>
+      </ListGroup>
     </Card>
   );
 };
